@@ -95,10 +95,7 @@ export function parseArray<_ParseOption extends Options_ParseArray = Options_Par
  * parseArray(undefined); // []
  * @since 1.0.0
  */
-export function parseArray<InputOption extends Options_ParseArray = Options_ParseArray>(
-  value2Parse: string | undefined,
-  options?: InputOption
-): number[] | string[] {
+export function parseArray(value2Parse: string | undefined, options?: Options_ParseArray): number[] | string[] {
   // override default options
   const overriddenOptions = { ..._defaultOptionsParseArray, ...options };
 
