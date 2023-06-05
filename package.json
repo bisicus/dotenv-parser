@@ -2,6 +2,12 @@
   "name": "dotenv-parser",
   "version": "1.0.0",
   "description": "parser for .env file written in TS",
+  "scripts": {
+    "build": "tsc --project ./",
+  },
+  "files": [
+    "lib/**/*"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:bisicus/dotenv-parser.git"
@@ -11,5 +17,8 @@
     "typescript"
   ],
   "author": "Leonardo Bisica",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.1.3"
+  }
 }
