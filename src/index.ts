@@ -25,6 +25,10 @@ export function parseBoolean(value2Parse: string | undefined): boolean {
 // ===   STRING   === //
 // ================== //
 
+export function parseString<Value extends string | undefined, Fallback extends string | null | undefined = undefined>(
+  value2Parse: Value,
+  fallbackValue?: Fallback
+): Value extends undefined ? (Fallback extends undefined ? never : Fallback) : string;
 /**
  * Parse an environment variable to a string. Requires a fallback value for `undefined` inputs.
  * @throws {RangeError} on parsing issue
@@ -34,22 +38,28 @@ export function parseBoolean(value2Parse: string | undefined): boolean {
  * parseString(undefined, 'fallback') // 'fallback'
  * @since 1.0.0
  */
-export function parseString(value2Parse: string | undefined, fallbackValue: string | undefined = undefined): string {
+export function parseString(value2Parse: string | undefined, fallbackValue?: string | null): string | null {
+  let parsed: string | null;
+
   if (typeof value2Parse === 'string') {
-    value2Parse = value2Parse.trim();
+    parsed = value2Parse.trim();
   } else {
     if (fallbackValue === undefined) {
       throw new RangeError('undefined input without a fallback');
     }
-    value2Parse = fallbackValue;
+    parsed = fallbackValue;
   }
-  return value2Parse;
+  return parsed;
 }
 
 // ================== //
 // ===   NUMBER   === //
 // ================== //
 
+export function parseNumber<Value extends string | undefined, Fallback extends number | null | undefined = undefined>(
+  value2Parse: Value,
+  fallbackValue?: Fallback
+): Value extends undefined ? (Fallback extends undefined ? never : Fallback) : number;
 /**
  * Parse an environment variable to a number. Requires a fallback value for `undefined` inputs.
  * @throws {RangeError} on parsing issue
@@ -59,8 +69,8 @@ export function parseString(value2Parse: string | undefined, fallbackValue: stri
  * parseNumber(undefined, 420) // 420
  * @since 1.0.0
  */
-export function parseNumber(value2Parse: string | undefined, fallbackValue: number | undefined = undefined): number {
-  let parsed = Number(value2Parse);
+export function parseNumber(value2Parse: string | undefined, fallbackValue?: number | null): number | null {
+  let parsed: number | null = Number(value2Parse);
 
   if (Number.isNaN(parsed)) {
     if (fallbackValue === undefined) {
