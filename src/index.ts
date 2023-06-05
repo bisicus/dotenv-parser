@@ -25,10 +25,13 @@ export function parseBoolean(value2Parse: string | undefined): boolean {
 // ===   STRING   === //
 // ================== //
 
+// overload for types
 export function parseString<Value extends string | undefined, Fallback extends string | null | undefined = undefined>(
   value2Parse: Value,
   fallbackValue?: Fallback
 ): Value extends undefined ? (Fallback extends undefined ? never : Fallback) : string;
+
+// actual implementation
 /**
  * Parse an environment variable to a string. Requires a fallback value for `undefined` inputs.
  * @throws {RangeError} on parsing issue
@@ -56,10 +59,13 @@ export function parseString(value2Parse: string | undefined, fallbackValue?: str
 // ===   NUMBER   === //
 // ================== //
 
+// overload for types
 export function parseNumber<Value extends string | undefined, Fallback extends number | null | undefined = undefined>(
   value2Parse: Value,
   fallbackValue?: Fallback
 ): Value extends undefined ? (Fallback extends undefined ? never : Fallback) : number;
+
+// actual implementation
 /**
  * Parse an environment variable to a number. Requires a fallback value for `undefined` inputs.
  * @throws {RangeError} on parsing issue
