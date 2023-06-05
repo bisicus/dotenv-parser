@@ -145,3 +145,56 @@ const _defaultOptionsParseArray: Required<Options_ParseArray> = {
   delimiter: ',',
   parseNumber: false,
 };
+
+// ================ //
+// ===   NULL   === //
+// ================ //
+
+// overload for types
+export function parseNull<Value extends string | undefined, _ParseOption extends Options_ParseNull = Options_ParseNull>(
+  value2Parse: Value,
+  options?: _ParseOption
+): Value extends undefined ? (_ParseOption extends { allowUndefined: true } ? null : never) : null;
+
+// actual implementation
+/**
+ * Parse an environment variable containing null. `undefined` is rejected unless specific option is set
+ * @throws {RangeError} on parsing issue
+ * @example
+ * parseNull('null'); // null
+ * parseNull('NULL'); // null
+ * parseNull('I will survive (...?)'); // RangeError
+ * parseNull(undefined); // RangeError
+ * parseNull(undefined, {allowUndefined: true}); // null
+ * @since 1.0.0
+ */
+export function parseNull(value2Parse: string | undefined, options?: Options_ParseNull): null {
+  // override default options
+  const overriddenOptions = { ..._defaultOptionsParseNull, ...options };
+
+  if (typeof value2Parse === 'string') {
+    value2Parse = value2Parse.toLowerCase().trim();
+    if (value2Parse !== 'null') {
+      throw new RangeError('value cannot be parsed into null');
+    }
+  } else {
+    if (!overriddenOptions.allowUndefined) {
+      throw new RangeError('undefined value is not allowed to be parsed into null');
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Options for `parseNull` method
+ * @since 1.0.0
+ */
+export interface Options_ParseNull {
+  /** default: `false` */
+  allowUndefined?: boolean;
+}
+
+const _defaultOptionsParseNull: Required<Options_ParseNull> = {
+  allowUndefined: false,
+};
