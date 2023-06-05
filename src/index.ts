@@ -29,9 +29,9 @@ export function parseBoolean(value2Parse: string | undefined): boolean {
  * Parse an environment variable to a string. Requires a fallback value for `undefined` inputs.
  * @throws {RangeError} on parsing issue
  * @example
- * parseBoolean('myvalue') // 'myvalue'
- * parseBoolean(undefined) // Exception
- * parseBoolean(undefined, 'fallback') // 'fallback'
+ * parseString('myvalue') // 'myvalue'
+ * parseString(undefined) // Exception
+ * parseString(undefined, 'fallback') // 'fallback'
  * @since 1.0.0
  */
 export function parseString(value2Parse: string | undefined, fallbackValue: string | undefined = undefined): string {
@@ -54,9 +54,9 @@ export function parseString(value2Parse: string | undefined, fallbackValue: stri
  * Parse an environment variable to a number. Requires a fallback value for `undefined` inputs.
  * @throws {RangeError} on parsing issue
  * @example
- * parseBoolean('69') // '69'
- * parseBoolean(undefined) // Exception
- * parseBoolean(undefined, 420) // 420
+ * parseNumber('69') // 69
+ * parseNumber(undefined) // Exception
+ * parseNumber(undefined, 420) // 420
  * @since 1.0.0
  */
 export function parseNumber(value2Parse: string | undefined, fallbackValue: number | undefined = undefined): number {
