@@ -1,0 +1,15 @@
+{
+  "name": "dotenv-parser",
+  "version": "1.0.0",
+  "description": "parser for .env file written in TS",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bisicus/dotenv-parser.git"
+  },
+  "keywords": [
+    "env",
+    "typescript"
+  ],
+  "author": "Leonardo Bisica",
+  "license": "MIT"
+}
